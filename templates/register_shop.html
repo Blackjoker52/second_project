@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   {% load static %} 
+    {% block link %} <link rel="stylesheet" href="{% static 'css/register_client.css' %}">{% endblock link %}
+</head>
+<body>
+    <img src="{% static 'images/logo.png' %}" alt="" class="logo">
+    <img src="{% static 'images/logintitle.svg' %}" alt="" class="title-img">
+    <div class="container">
+        <h1>Register as a Repair Shop</h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Enter your phone number">
+            <input type="text" name="password" placeholder="Enter your password"><br>
+            <span><a href="/users/login">Already have an account?</a></span>
+
+            <div class="buttons">
+                <button type="submit" id="submit-btn">
+                    <a href="/users/registerClient" style="color: white; text-decoration: none;">
+                        Register Client</a>
+                </button>
+                <button type="submit" id="submit-btn">Register Repair Shop</button>
+            </div>
+        </form>
+    </div>
+        {% comment %} <!-- <p> already have na account? <a href="login">login</a> </p>  --> {% endcomment %}
+</body>
+</html>

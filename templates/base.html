@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %} {% endblock title %}</title>
+
+    {% load static %}
+    {% block link %}
+    {% endblock link %}
+</head>
+<body>
+    {% load static %}
+    <nav>
+        <img src="{% static 'images/logo.png' %}" alt="" class="logo">
+        <a href="/users/logout">logout</a>
+        <div id="profile-btn">
+            <img src="{% static 'images/user.svg' %}" alt="">
+            <p> user</p>
+        </div>
+    </nav>
+
+    {% block body %}
+    {% endblock body %}
+</body>
+{% block script %}  {% endblock script %}
+</html>

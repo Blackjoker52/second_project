@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">  
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock link %}
+
+{% block body %}
+    {% load static %}
+    <div id="messages-container">
+
+        <div class="system-messageBox messageBox">
+            <p class="message system-message">
+                Start your conversation here
+            </p>
+        </div>
+
+        <div class="bot-messageBox messageBox">
+            <img src="{% static 'images/chatBotImage.svg' %}" alt="" class="user-image">
+            <p class="message bot-message">
+                Hello <b style="background-color:rgba(0,0,0,0.4);padding:4px;border-radius:4px;color:rgba(255,255,255,0.7);text-shadow:none;">
+                    {{myUser.user.username}}</b>, You are logged in as a 
+                <b style="background-color:rgba(0,0,0,0.4);padding:4px;border-radius:4px;color:rgba(255,255,255,0.7);text-shadow:none;">
+                    {{myUser.userType}}</b>
+            </p>
+        </div>
+        {% for message in allMessages%}
+            {% comment %} Messages from the System {% endcomment %}
+            {% if message.sender == "system" %}
+                <div class="system-messageBox messageBox">
+                    <p class="message system-message">
+                        {{message.text}}
+                    </p>
+                </div>
+            {% endif %}
+
+            {% comment %} Messages from the User {% endcomment %}
+            {% if message.sender == "user" %}
+                <div class="user-messageBox messageBox">
+                    <p class="message user-message"> {{message.text}} </p>
+                    <img src="{% static 'images/user.svg' %}" alt="" class="user-image">
+                </div>
+
+            {% endif %}
+                
+            {% comment %} Messages from the Bot {% endcomment %}
+            {% if message.sender == "bot" %}
+                <div class="bot-messageBox messageBox">
+                    <img src="{% static 'images/chatBotImage.svg' %}" alt="" class="user-image">
+                    <p class="message bot-message">
+                        {{message.text}}
+                    </p>
+                </div>
+
+            {% endif %}
+
+
+        {% endfor %}
+
+
+    </div>
+    
+
+    <!-- INPUT BOX -->
+    <form method="post" id="input-box">
+        {% csrf_token %}
+        <input class="textInput" type="text" placeholder="Enter your message here" name="sent_message" id="sent_message">
+        <button id="send-btn" style="background-color: #4CBCDA;padding:6px;">
+            <img src="{% static 'images/vector.svg' %}" alt="" class="vector-img"> 
+        </button>
+        
+    </form>
+    {% comment %} <div style="width:40px; height:40px; background-color:red;">
+    </div> {% endcomment %}
+    
+    <div class="bottom">
+        
+        {% load static %}
+        <div class="nav-links">
+            <a href="" > <img src="{% static 'images/repair_request.svg' %}" alt=""></a>
+            <span>repair request</span>
+        </div>
+        <div class="nav-links">
+            <a href=""> <img src="{% static 'images/messenger.svg' %}" alt=""></a>
+            <span>messenger</span>
+        </div>
+        <div class="nav-links">
+            <a href="" > <img src="{% static 'images/repair.svg' %}" alt=""></a>
+            <span>repair</span>
+        </div>
+    </div>
+
+    {% load static %}
+    <script src="{% static 'javascript/home.js' %}"></script>
+{% endblock body %}
+
+
